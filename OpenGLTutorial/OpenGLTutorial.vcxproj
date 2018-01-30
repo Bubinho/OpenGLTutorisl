@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -73,12 +74,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Bubes\Documents\Coding\OpenGL_Tutorial\Libraries\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Bubes\Documents\Coding\OpenGL_Tutorial\Libraries\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\OpenGLLibraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\OpenGLLibraries\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Users\Bubes\Documents\Coding\OpenGL_Tutorial\Libraries\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Bubes\Documents\Coding\OpenGL_Tutorial\Libraries\Libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>F:\Softwareentwicklung\OpenGLTools\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Softwareentwicklung\OpenGLTools\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,6 +101,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
