@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGLTutorial", "OpenGLTutorial\OpenGLTutorial.vcxproj", "{21E72A00-D248-4D96-A5B4-A19C8846AFB4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2.1.HelloTriangle", "2.1.HelloTriangle\2.1.HelloTriangle.vcxproj", "{53507C2A-A68D-40F7-8432-C0EB06D90771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{21E72A00-D248-4D96-A5B4-A19C8846AFB4}.Release|x64.Build.0 = Release|x64
 		{21E72A00-D248-4D96-A5B4-A19C8846AFB4}.Release|x86.ActiveCfg = Release|Win32
 		{21E72A00-D248-4D96-A5B4-A19C8846AFB4}.Release|x86.Build.0 = Release|Win32
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Debug|x64.ActiveCfg = Debug|x64
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Debug|x64.Build.0 = Debug|x64
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Debug|x86.ActiveCfg = Debug|Win32
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Debug|x86.Build.0 = Debug|Win32
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Release|x64.ActiveCfg = Release|x64
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Release|x64.Build.0 = Release|x64
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Release|x86.ActiveCfg = Release|Win32
+		{53507C2A-A68D-40F7-8432-C0EB06D90771}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
