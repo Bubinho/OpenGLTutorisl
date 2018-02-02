@@ -112,13 +112,13 @@ int main()
 
 	
 	// texture
-	unsigned int texture;
+	/*unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_1D, texture);
 	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
 
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, NUM_METABALLS, 0, 0, GL_RGB, GL_UNSIGNED_BYTE, metaballs);
 	
@@ -127,7 +127,7 @@ int main()
 	
 	
 	
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, 5, 0, GL_RGB, GL_UNSIGNED_BYTE, metaballs);
+	//glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, 5, 0, GL_RGB, GL_UNSIGNED_BYTE, metaballs);
 	
 
 
@@ -141,7 +141,7 @@ int main()
 		processInput(window);
 
 		//move balls
-		//move(metaballs, velocities);
+		move(metaballs, velocities);
 		// render
 		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -149,8 +149,8 @@ int main()
 
 		// render the triangle
 		ourShader.use();
-		glBindTexture(GL_TEXTURE_1D, texture);
-		//ourShader.setFloat3Vector("metas", metaballs, 10);
+		//glBindTexture(GL_TEXTURE_1D, texture);
+		ourShader.setFloat3Vector("metas", metaballs, 10);
 		glBindVertexArray(VAO);
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

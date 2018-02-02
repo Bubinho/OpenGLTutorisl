@@ -11,7 +11,7 @@ out vec4 FragColor;
 void main()
 {
 //----------normal balls ---------------
-	float x =  gl_FragCoord.x;
+	/*float x =  gl_FragCoord.x;
 	float y  = gl_FragCoord.y;
 	vec4 mb;
 	
@@ -32,10 +32,10 @@ void main()
 		}
 	}
 
-    FragColor = vec4(mb.x, 0.0f, 0.0f, 1.0f);
+    FragColor = vec4(mb.x, 0.0f, 0.0f, 1.0f);*/
 
 	//-------------------- metaballs --------------------------
-	/*float x =  gl_FragCoord.x;
+	float x =  gl_FragCoord.x;
 	float y  = gl_FragCoord.y;
 	float v = 0.0f;
 
@@ -52,6 +52,6 @@ void main()
 		FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
 	}else{
 		FragColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	}*/
+	}
 
 }
