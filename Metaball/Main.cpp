@@ -14,7 +14,7 @@ void move(float *balls, float *vel);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-int NUM_METABALLS = 10;
+int NUM_METABALLS = 1000;
 
 int main()
 {
@@ -92,14 +92,15 @@ int main()
 
 
 	// simulaztion setuü
-	float *metaballs = new float[NUM_METABALLS * 3]; // for uniform
+	GLfloat *metaballs = new float[NUM_METABALLS * 4]; 
 	float *velocities = new float[NUM_METABALLS * 2];
 	for (int i = 0; i < NUM_METABALLS; i++) {
 		float radius = 40;//(rand() % 9 * 0.1 + 10) * 40;
 		
-		metaballs[3 * i + 0] = ((rand() % 9) * 0.1) * (SCR_WIDTH - 2 * radius) + radius;
-		metaballs[3 * i + 1] = ((rand() % 9) * 0.1) * (SCR_HEIGHT - 2 * radius) + radius;
-		metaballs[3 * i + 2] = radius;
+		metaballs[4 * i + 0] = ((rand() % 9) * 0.1) * (SCR_WIDTH - 2 * radius) + radius;
+		metaballs[4 * i + 1] = ((rand() % 9) * 0.1) * (SCR_HEIGHT - 2 * radius) + radius;
+		metaballs[4 * i + 2] = 5;
+		metaballs[4 * i + 3] = 1.0f;
 		//std::cout << metaballs[3 * i + 0] << std::endl;
 
 		velocities[2 * i + 0] = ((rand() % 10 + 1)) - 5;
@@ -109,16 +110,29 @@ int main()
 	metaballs[ 0] = 400.0f;
 	metaballs[ 1] = 400.0f;
 	metaballs[2] = 10.0f;*/
-
+	
+	const GLfloat metaball[4] = { 1, 1, 0, 1 };
+	
+	const size_t size = sizeof(metaballs) *sizeof(GLfloat) * NUM_METABALLS;
+	//std::cout << size << std::endl;
+	//buffer object
+	unsigned int buffer;
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_TEXTURE_BUFFER, buffer);
+	glBufferData(GL_TEXTURE_BUFFER, size, NULL, GL_STATIC_DRAW);
+	glBufferSubData(GL_TEXTURE_BUFFER, 0, size, metaballs);
 	
 	// texture
-	/*unsigned int texture;
+	unsigned int texture;
 	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_1D, texture);
-	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_BUFFER, texture);
+	glTexBuffer(GL_TEXTURE_BUFFER, GL_RGBA32F, buffer);
+	//glBindTexture(GL_TEXTURE_2D, texture);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, NUM_METABALLS, 0, 0, GL_RGB, GL_UNSIGNED_BYTE, metaballs);
 	
@@ -142,15 +156,17 @@ int main()
 
 		//move balls
 		move(metaballs, velocities);
+		glBufferSubData(GL_TEXTURE_BUFFER, 0, size, metaballs);
 		// render
 		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		
 		// render the triangle
 		ourShader.use();
-		//glBindTexture(GL_TEXTURE_1D, texture);
-		ourShader.setFloat3Vector("metas", metaballs, 10);
+		//glBindTexture(GL_TEXTURE_2D, texture);
+		//ourShader.setFloat3Vector("metas", metaballs, 10);
+		
 		glBindVertexArray(VAO);
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -193,9 +209,10 @@ void move(float *balls, float *vel)
 {
 	for (int i = 0; i < NUM_METABALLS; i++) 
 	{
-		float x  = balls[3 * i + 0];
-		float y = balls[3 * i + 1];
-		float r = balls[3 * i + 2];
+		float x  = balls[4 * i + 0];
+		float y = balls[4 * i + 1];
+		float r = balls[4 * i + 2];
+		float tmp = balls[4 * i + 3];
 		float velX = vel[2 * i + 0];
 		float velY = vel[2 * i + 1];
 
@@ -211,8 +228,8 @@ void move(float *balls, float *vel)
 			vel[2 * i + 1] = velY;
 		}
 
-		balls[3 * i + 0] = x;
-		balls[3 * i + 1] = y;
+		balls[4 * i + 0] = x;
+		balls[4 * i + 1] = y;
 		
 	}
 	

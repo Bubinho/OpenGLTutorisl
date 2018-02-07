@@ -2,7 +2,8 @@
 precision highp float;
 uniform vec3 metas [10];
 uniform float my;
-uniform sampler1D ourTexture;
+//uniform sampler2D ourTexture;
+uniform samplerBuffer ourTexture;
 
 out vec4 FragColor;
 
@@ -19,7 +20,8 @@ void main()
 	{
 		
 		//vec3 mb = metas[i];
-		 mb = texture(ourTexture, i/10.f);
+		//mb = texture(ourTexture, vec2(0.0f, 0.0f));
+		mb= texelFetch(ourTexture, i);
 		float dx = mb.x - x;
         float dy = mb.y - y;
         float r = mb.z;
@@ -32,16 +34,21 @@ void main()
 		}
 	}
 
-    FragColor = vec4(mb.x, 0.0f, 0.0f, 1.0f);*/
+    FragColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+	//FragColor = texelFetch(ourTexture, 0);*/
+
+
 
 	//-------------------- metaballs --------------------------
 	float x =  gl_FragCoord.x;
 	float y  = gl_FragCoord.y;
 	float v = 0.0f;
 
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 1000; i++)
 	{
-		vec3 mb = metas[i];
+		//vec3 mb = metas[i];
+		vec4 mb = texelFetch(ourTexture, i);
 		float dx = mb.x - x;
         float dy = mb.y - y;
         float r = mb.z;
